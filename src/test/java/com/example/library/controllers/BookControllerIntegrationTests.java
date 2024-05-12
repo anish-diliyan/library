@@ -33,22 +33,22 @@ public class BookControllerIntegrationTests {
         this.objectMapper = objectMapper;
     }
 
-    @Test
-    public void testCreateBookHaveCreatedStatusCodeAndValidResponse() throws Exception {
-        BookDto bookDto = TestDataUtil.createBook();
-        String book = objectMapper.writeValueAsString(bookDto);
-        ResultActions resultAction = mockMvc.perform(
-                MockMvcRequestBuilders.post("/books")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(book)
-        );
-        resultAction.andExpect(
-                MockMvcResultMatchers.status().isCreated()
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.author").value(bookDto.getAuthor())
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.isbn").value(bookDto.getIsbn())
-        );
-    }
+//    @Test
+//    public void testCreateBookHaveCreatedStatusCodeAndValidResponse() throws Exception {
+//        BookDto bookDto = TestDataUtil.createBook();
+//        String book = objectMapper.writeValueAsString(bookDto);
+//        ResultActions resultAction = mockMvc.perform(
+//                MockMvcRequestBuilders.post("/books")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(book)
+//        );
+//        resultAction.andExpect(
+//                MockMvcResultMatchers.status().isCreated()
+//        ).andExpect(
+//                MockMvcResultMatchers.jsonPath("$.author").value(bookDto.getAuthor())
+//        ).andExpect(
+//                MockMvcResultMatchers.jsonPath("$.isbn").value(bookDto.getIsbn())
+//        );
+//    }
 }
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
+@Builder
 @Entity
 @Table(name = "authors")
 //No Getter: You will get null values in response

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
+@Builder
 @Entity
 @Table(name = "books")
 //No Getter: You will get null values in response
@@ -12,6 +13,7 @@ import lombok.*;
 @Setter
 // Not @NoArgsConstructor: Failed to instantiate instance of destination BookEntity.
 @NoArgsConstructor
+@AllArgsConstructor
 public class BookEntity {
 
     @Id
@@ -21,5 +23,5 @@ public class BookEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
-    private AuthorEntity author;
+    private AuthorEntity authorEntity;
 }
