@@ -5,23 +5,21 @@ import lombok.*;
 
 
 @Entity
-@Table(name = "authors")
+@Table(name = "books")
 //No Getter: You will get null values in response
 @Getter
 // No @Setter: must be manually assigned before calling 'persist()'
 @Setter
-//Not AllArgsConstructor: Lombok @Builder needs a proper constructor for this class
-@AllArgsConstructor
 // Not @NoArgsConstructor: Failed to instantiate instance of destination BookEntity.
 @NoArgsConstructor
-public class AuthorEntity {
+public class BookEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_id_seq")
-    private Long id;
+    private String isbn;
 
-    private String name;
+    private String title;
 
-    private Integer age;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
+    private AuthorEntity author;
 }
