@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @RestController
 public class BookController {
 
-    private BookService bookService;
-    private Mapper<BookEntity, BookDto> bookMapper;
+    private final BookService bookService;
+    private final Mapper<BookEntity, BookDto> bookMapper;
 
     public BookController(Mapper<BookEntity, BookDto> bookMapper, BookService bookService) {
         this.bookMapper = bookMapper;
@@ -32,9 +32,9 @@ public class BookController {
         BookDto savedUpdatedBookDto = bookMapper.mapTo(savedBookEntity);
 
         if(bookExists){
-            return new ResponseEntity(savedUpdatedBookDto, HttpStatus.OK);
+            return new ResponseEntity<>(savedUpdatedBookDto, HttpStatus.OK);
         } else {
-            return new ResponseEntity(savedUpdatedBookDto, HttpStatus.CREATED);
+            return new ResponseEntity<>(savedUpdatedBookDto, HttpStatus.CREATED);
         }
     }
 
@@ -73,8 +73,8 @@ public class BookController {
     }
 
     @DeleteMapping(path = "/books/{isbn}")
-    public ResponseEntity deleteBook(@PathVariable("isbn") String isbn) {
+    public ResponseEntity<Object> deleteBook(@PathVariable("isbn") String isbn) {
         bookService.delete(isbn);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }
