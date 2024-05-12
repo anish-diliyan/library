@@ -15,6 +15,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.htmlunit.UrlRegexRequestMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -54,6 +55,16 @@ class AuthorControllerIntegrationTests {
                 MockMvcResultMatchers.jsonPath("$.name").value("Anish")
         ).andExpect(
                 MockMvcResultMatchers.jsonPath("$.age").value(20)
+        );
+    }
+
+    @Test
+    public void testListAuthorReturn200StatusCode() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/authors")
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(
+                MockMvcResultMatchers.status().isOk()
         );
     }
 }
